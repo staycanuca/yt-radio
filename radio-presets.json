@@ -1,0 +1,1255 @@
+[
+  {
+    "name": "pop",
+    "group": "Relax",
+    "label": "Pop / City Pop",
+    "description": "Porneste dintr-un seed calm, potrivit pentru un radio relaxat.",
+    "seedUrl": "https://youtu.be/szy_L1-16wg",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "classic",
+    "group": "Relax",
+    "label": "Classic / Piano",
+    "description": "Porneste dintr-un set de pian usor, bun pentru fundal discret.",
+    "seedUrl": "https://youtu.be/OcIaORMl3_U",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "manele",
+    "group": "Romania Populara",
+    "label": "Manele / Mainstream",
+    "description": "Porneste dintr-un hit de manele mainstream, foarte potrivit pentru public local.",
+    "seedUrl": "https://www.youtube.com/watch?v=ehyX55EQLKM",
+    "seedUrls": [
+      "https://www.youtube.com/watch?v=ehyX55EQLKM",
+      "https://www.youtube.com/watch?v=VHygTMF98Rw",
+      "https://www.youtube.com/watch?v=bffDM2APybs"
+    ],
+    "stationMode": "strict",
+    "rules": {
+      "refreshFromSeedEvery": 3,
+      "minDurationSec": 120,
+      "maxDurationSec": 420,
+      "allowArtists": [
+        "florin salam",
+        "adrian minune",
+        "nicolae guta",
+        "vali vijelie",
+        "costi",
+        "denisa",
+        "gabi lunca",
+        "cornelia catanga"
+      ],
+      "blockArtists": [
+        "various artists",
+        "soundtrack"
+      ],
+      "allowKeywords": [
+        "manele",
+        "petrecere",
+        "romaneasca"
+      ],
+      "blockKeywords": [
+        "live",
+        "karaoke",
+        "cover",
+        "remix",
+        "slowed",
+        "speed up",
+        "sped up",
+        "reaction",
+        "mashup",
+        "playlist",
+        "mix",
+        "full album"
+      ],
+      "dedupeWindowSize": 6
+    },
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "trap-ro",
+    "group": "Romania Populara",
+    "label": "Trap / Rap Romanesc",
+    "description": "Porneste din zona trap si rap romaneasca, buna pentru un radio modern.",
+    "seedUrl": "https://www.youtube.com/watch?v=wPhWmQv8J3M",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "dance-ro",
+    "group": "Romania Populara",
+    "label": "Dance / Pop Romanesc",
+    "description": "Porneste din zona dance-pop romaneasca, potrivita pentru radio comercial.",
+    "seedUrl": "https://www.youtube.com/watch?v=5XtBRLqgRTs",
+    "seedUrls": [
+      "https://www.youtube.com/watch?v=5XtBRLqgRTs",
+      "https://www.youtube.com/watch?v=3uoXY8HKBlM",
+      "https://www.youtube.com/watch?v=ekIMGAmgXSI"
+    ],
+    "stationMode": "strict",
+    "rules": {
+      "refreshFromSeedEvery": 3,
+      "minDurationSec": 120,
+      "maxDurationSec": 360,
+      "allowArtists": [
+        "inna",
+        "alexandra stan",
+        "antonia",
+        "dj project",
+        "morandi",
+        "fly project",
+        "akcent",
+        "delia",
+        "smiley",
+        "andra"
+      ],
+      "blockArtists": [
+        "various artists",
+        "soundtrack"
+      ],
+      "allowKeywords": [
+        "dance",
+        "pop",
+        "romanesc",
+        "romaneasca",
+        "club"
+      ],
+      "blockKeywords": [
+        "live",
+        "karaoke",
+        "cover",
+        "remix",
+        "slowed",
+        "speed up",
+        "sped up",
+        "reaction",
+        "mashup",
+        "playlist",
+        "full album"
+      ],
+      "dedupeWindowSize": 6
+    },
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "manele-clasic",
+    "group": "Party",
+    "label": "Manele / Clasice",
+    "description": "Porneste dintr-un reper foarte cunoscut pentru petreceri si nostalgie.",
+    "seedUrl": "https://www.youtube.com/watch?v=VHygTMF98Rw",
+    "seedUrls": [
+      "https://www.youtube.com/watch?v=VHygTMF98Rw",
+      "https://www.youtube.com/watch?v=bffDM2APybs",
+      "https://www.youtube.com/watch?v=DYdJ5XVqRN0"
+    ],
+    "stationMode": "strict",
+    "rules": {
+      "refreshFromSeedEvery": 3,
+      "minDurationSec": 120,
+      "maxDurationSec": 480,
+      "allowArtists": [
+        "adrian minune",
+        "nicolae guta",
+        "vali vijelie",
+        "gabi lunca",
+        "cornelia catanga",
+        "ionel tudorache",
+        "romica puceanu",
+        "maria tanase"
+      ],
+      "blockArtists": [
+        "various artists",
+        "soundtrack"
+      ],
+      "allowKeywords": [
+        "manele",
+        "lautareasca",
+        "petrecere",
+        "populara"
+      ],
+      "blockKeywords": [
+        "live",
+        "karaoke",
+        "cover",
+        "remix",
+        "slowed",
+        "speed up",
+        "sped up",
+        "reaction",
+        "mashup",
+        "playlist",
+        "full album"
+      ],
+      "dedupeWindowSize": 6
+    },
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "ro-mainstream",
+    "group": "Romania Mainstream",
+    "label": "Romania Mainstream / Pop",
+    "description": "Porneste dintr-un seed pop romanesc accesibil, potrivit pentru un radio foarte generalist.",
+    "seedUrl": "https://www.youtube.com/watch?v=3uoXY8HKBlM",
+    "seedUrls": [
+      "https://www.youtube.com/watch?v=3uoXY8HKBlM",
+      "https://www.youtube.com/watch?v=5XtBRLqgRTs",
+      "https://www.youtube.com/watch?v=ekIMGAmgXSI"
+    ],
+    "stationMode": "strict",
+    "rules": {
+      "refreshFromSeedEvery": 3,
+      "minDurationSec": 120,
+      "maxDurationSec": 360,
+      "allowArtists": [
+        "smiley",
+        "delia",
+        "andra",
+        "the motans",
+        "irina rimes",
+        "carla",
+        "antonia",
+        "inna",
+        "alex velea",
+        "alina eremia"
+      ],
+      "blockArtists": [
+        "various artists",
+        "soundtrack"
+      ],
+      "allowKeywords": [
+        "pop",
+        "hit",
+        "romanesc",
+        "romaneasca"
+      ],
+      "blockKeywords": [
+        "live",
+        "karaoke",
+        "cover",
+        "remix",
+        "slowed",
+        "speed up",
+        "sped up",
+        "reaction",
+        "mashup",
+        "playlist",
+        "full album"
+      ],
+      "dedupeWindowSize": 6
+    },
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "party-ro",
+    "group": "Party",
+    "label": "Party Romania",
+    "description": "Porneste dintr-un hit romanesc foarte recognoscibil pentru atmosfera de petrecere.",
+    "seedUrl": "https://www.youtube.com/watch?v=bffDM2APybs",
+    "seedUrls": [
+      "https://www.youtube.com/watch?v=bffDM2APybs",
+      "https://www.youtube.com/watch?v=VHygTMF98Rw",
+      "https://www.youtube.com/watch?v=DYdJ5XVqRN0"
+    ],
+    "stationMode": "strict",
+    "rules": {
+      "refreshFromSeedEvery": 3,
+      "minDurationSec": 120,
+      "maxDurationSec": 420,
+      "allowArtists": [
+        "nicolae guta",
+        "adrian minune",
+        "vali vijelie",
+        "gabi lunca",
+        "cornelia catanga",
+        "ionel tudorache",
+        "florin salam",
+        "maria tanase"
+      ],
+      "blockArtists": [
+        "various artists",
+        "soundtrack"
+      ],
+      "allowKeywords": [
+        "petrecere",
+        "manele",
+        "lautareasca",
+        "populara",
+        "romaneasca"
+      ],
+      "blockKeywords": [
+        "live",
+        "karaoke",
+        "cover",
+        "remix",
+        "slowed",
+        "speed up",
+        "sped up",
+        "reaction",
+        "mashup",
+        "playlist",
+        "full album"
+      ],
+      "dedupeWindowSize": 6
+    },
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "ro-export",
+    "group": "Romania Export",
+    "label": "Romania Export / Stereo Love",
+    "description": "Porneste din zona de hituri romanesti care au circulat puternic si international.",
+    "seedUrl": "https://www.youtube.com/watch?v=ekIMGAmgXSI",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "ro-club",
+    "group": "Romania Export",
+    "label": "Romania Export / Club",
+    "description": "Porneste dintr-un seed romanesc foarte bun pentru club si radio dance.",
+    "seedUrl": "https://www.youtube.com/watch?v=sS76eS34Y0c",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "ro-eurodance",
+    "group": "Romania Export",
+    "label": "Romania Export / Eurodance",
+    "description": "Porneste dintr-un clasic est-european foarte recognoscibil si dansant.",
+    "seedUrl": "https://www.youtube.com/watch?v=jRx5PrAlUdY",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "pop-intl",
+    "group": "International Pop",
+    "label": "International Pop / Modern",
+    "description": "Porneste dintr-un seed pop modern, bun pentru un radio international de hituri.",
+    "seedUrl": "https://www.youtube.com/watch?v=4NRXx6U8ABQ",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "mainstream-intl",
+    "group": "International Pop",
+    "label": "International Pop / Mainstream",
+    "description": "Porneste dintr-un hit pop foarte mainstream, bun pentru audienta larga.",
+    "seedUrl": "https://www.youtube.com/watch?v=JGwWNGJdvx8",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "latin-intl",
+    "group": "International Pop",
+    "label": "International Latin / Pop",
+    "description": "Porneste dintr-un seed latin global, bun pentru radio de vara sau party.",
+    "seedUrl": "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "kpop-intl",
+    "group": "International Pop",
+    "label": "International Pop / K-Pop",
+    "description": "Porneste dintr-un seed K-pop foarte accesibil si energic.",
+    "seedUrl": "https://www.youtube.com/watch?v=gdZLi9oWNZg",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "dance-intl",
+    "group": "International Dance",
+    "label": "International Dance / French House",
+    "description": "Porneste dintr-un seed dance clasic, bun pentru radio de club sau drive.",
+    "seedUrl": "https://www.youtube.com/watch?v=FGBhQbmPwH8",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "funk-intl",
+    "group": "International Dance",
+    "label": "International Funk / Party",
+    "description": "Porneste dintr-un seed funky modern, bun pentru party si radio energic.",
+    "seedUrl": "https://www.youtube.com/watch?v=OPf0YbXqDm0",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "house-intl",
+    "group": "Chill & Electronic",
+    "label": "Chill & Electronic / House",
+    "description": "Porneste dintr-un seed house clasic, bun pentru un radio electronic fluid.",
+    "seedUrl": "https://www.youtube.com/watch?v=k8CSV88jKEc",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "edm-intl",
+    "group": "Chill & Electronic",
+    "label": "Chill & Electronic / EDM",
+    "description": "Porneste dintr-un seed EDM foarte popular, bun pentru drive si antrenament.",
+    "seedUrl": "https://www.youtube.com/watch?v=_ovdm2yX4MA",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "eighties-intl",
+    "group": "International Dance",
+    "label": "International 80s / Pop",
+    "description": "Porneste dintr-un seed anii '80, bun pentru nostalgie si radio retro.",
+    "seedUrl": "https://www.youtube.com/watch?v=djV11Xbc914",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "rock-intl",
+    "group": "International Rock",
+    "label": "International Rock / Alt",
+    "description": "Porneste dintr-un seed rock modern, potrivit pentru un radio energic.",
+    "seedUrl": "https://www.youtube.com/watch?v=kXYiU_JCYtU",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "grunge-intl",
+    "group": "International Rock",
+    "label": "International Rock / Grunge",
+    "description": "Porneste dintr-un seed grunge clasic, bun pentru un radio mai agresiv.",
+    "seedUrl": "https://www.youtube.com/watch?v=hTWKbfoikeg",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "classic-rock-intl",
+    "group": "International Rock",
+    "label": "International Rock / Classic",
+    "description": "Porneste dintr-un clasic rock foarte recognoscibil, bun pentru radio evergreen.",
+    "seedUrl": "https://www.youtube.com/watch?v=fJ9rUzIMcZQ",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "christmas-intl",
+    "group": "Seasonal",
+    "label": "Seasonal / Christmas",
+    "description": "Porneste dintr-un seed de Craciun foarte recognoscibil, util pentru radio sezonier.",
+    "seedUrl": "https://www.youtube.com/watch?v=yXQViqx6GMY",
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "acordeon",
+    "label": "Muzica populara / Acordeon",
+    "group": "Party",
+    "description": "",
+    "seedUrl": "https://www.youtube.com/watch?v=DYdJ5XVqRN0",
+    "seedUrls": [
+      "https://www.youtube.com/watch?v=DYdJ5XVqRN0",
+      "https://www.youtube.com/watch?v=-WTm0POoSVU",
+      "https://www.youtube.com/watch?v=_s1hCU_xLaA"
+    ],
+    "stationMode": "strict",
+    "rules": {
+      "refreshFromSeedEvery": 3,
+      "minDurationSec": 120,
+      "maxDurationSec": 480,
+      "allowArtists": [
+        "vasile pandelescu",
+        "marcel budala",
+        "ionica minune",
+        "marian mexicanu",
+        "marian mateescu",
+        "faramita lambru"
+      ],
+      "blockArtists": [
+        "various artists",
+        "soundtrack"
+      ],
+      "allowKeywords": [
+        "acordeon",
+        "acordeon instrumentala",
+        "acordeon petrecere",
+        "acordeon populara"
+      ],
+      "blockKeywords": [
+        "live",
+        "karaoke",
+        "cover",
+        "remix",
+        "slowed",
+        "speed up",
+        "sped up",
+        "reaction",
+        "mashup",
+        "playlist",
+        "full album"
+      ],
+      "dedupeWindowSize": 6
+    },
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "custom-queue",
+    "label": "Custom Queue / Manual",
+    "group": "Custom",
+    "description": "Manually curated queue - add your own videos and playlists from the backend",
+    "seedUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "stationMode": "strict",
+    "rules": {
+      "refreshFromSeedEvery": 999,
+      "minDurationSec": 0,
+      "maxDurationSec": 99999,
+      "allowArtists": [],
+      "blockArtists": [],
+      "allowKeywords": [],
+      "blockKeywords": [],
+      "dedupeWindowSize": 0
+    },
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "chill-playlist",
+    "group": "Enhanced Seeds",
+    "label": "Chill Vibes / Playlist Seed",
+    "description": "Uses a YouTube playlist as seed - pulls random tracks from playlist for variety",
+    "seed": {
+      "type": "playlist",
+      "url": "https://www.youtube.com/playlist?list=PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf",
+      "weight": 1.0
+    },
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "lofi-mix",
+    "group": "Enhanced Seeds",
+    "label": "Lo-Fi / Mix Seed",
+    "description": "Uses a YouTube Mix as seed - leverages YouTube's curated mix algorithm",
+    "seed": {
+      "type": "mix",
+      "url": "https://www.youtube.com/watch?v=jfKfPfyJRdk&list=RDjfKfPfyJRdk",
+      "weight": 1.0
+    },
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "vevo-channel",
+    "group": "Enhanced Seeds",
+    "label": "Pop Hits / Channel Seed",
+    "description": "Uses a YouTube channel as seed - pulls from channel's uploads",
+    "seed": {
+      "type": "channel",
+      "url": "https://www.youtube.com/@vevo",
+      "weight": 1.0
+    },
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "hybrid-dance",
+    "group": "Hybrid Propagation",
+    "label": "Dance Hybrid / 30% Seed + 70% Recommendations",
+    "description": "Hybrid propagation: 30% from seed playlist, 70% from YouTube recommendations",
+    "seed": {
+      "type": "playlist",
+      "url": "https://www.youtube.com/playlist?list=PLw-VjHDlEOgvtnnnqWlTqByAtC7tXBkKq",
+      "weight": 1.0
+    },
+    "propagationStrategy": "hybrid",
+    "hybridSeedRatio": 0.3,
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "hybrid-rock",
+    "group": "Hybrid Propagation",
+    "label": "Rock Hybrid / 50% Seed + 50% Recommendations",
+    "description": "Hybrid propagation: 50% from seed mix, 50% from YouTube recommendations",
+    "seed": {
+      "type": "mix",
+      "url": "https://www.youtube.com/watch?v=fJ9rUzIMcZQ&list=RDfJ9rUzIMcZQ",
+      "weight": 1.0
+    },
+    "propagationStrategy": "hybrid",
+    "hybridSeedRatio": 0.5,
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  },
+  {
+    "name": "multi-seed-weighted",
+    "group": "Enhanced Seeds",
+    "label": "Multi-Seed / Weighted Mix",
+    "description": "Multiple seeds with different weights and types for diverse content",
+    "seeds": [
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/watch?v=ekIMGAmgXSI",
+        "weight": 0.5
+      },
+      {
+        "type": "playlist",
+        "url": "https://www.youtube.com/playlist?list=PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf",
+        "weight": 0.3
+      },
+      {
+        "type": "mix",
+        "url": "https://www.youtube.com/watch?v=jfKfPfyJRdk&list=RDjfKfPfyJRdk",
+        "weight": 0.2
+      }
+    ],
+    "profiles": {
+      "safe": {
+        "settings": {
+          "radioBitrate": 192,
+          "playbackBackend": "native",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "360p"
+        }
+      },
+      "hq": {
+        "settings": {
+          "radioBitrate": 320,
+          "playbackBackend": "auto",
+          "playbackClient": "ANDROID",
+          "playbackType": "video+audio",
+          "playbackFormat": "mp4",
+          "playbackQuality": "best"
+        }
+      }
+    }
+  }
+]

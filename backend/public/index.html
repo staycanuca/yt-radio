@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="YT Radio Dashboard - Control your YouTube radio station">
+  <title>YT Radio Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      background: #1a1a2e; 
+      color: #eee; 
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container { 
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 12px;
+    }
+    h1 { 
+      color: #e94560; 
+      margin-bottom: 16px;
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      text-align: center;
+    }
+    .card { 
+      background: #16213e; 
+      border-radius: 12px; 
+      padding: 16px; 
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .card h2 { 
+      color: #0f3460; 
+      margin-bottom: 12px; 
+      font-size: clamp(0.95rem, 3vw, 1.1rem);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); 
+      gap: 16px;
+    }
+    .now-playing { 
+      font-size: clamp(1.1rem, 4vw, 1.5rem); 
+      color: #e94560; 
+      margin: 10px 0;
+      word-break: break-word;
+      line-height: 1.3;
+    }
+    .stat { 
+      display: flex; 
+      justify-content: space-between; 
+      padding: 10px 0; 
+      border-bottom: 1px solid #0f3460;
+      gap: 12px;
+    }
+    .stat:last-child { border: none; }
+    .label { 
+      color: #888; 
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      flex-shrink: 0;
+    }
+    .value { 
+      color: #e94560; 
+      font-weight: bold;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      text-align: right;
+      word-break: break-word;
+    }
+    .btn { 
+      background: #e94560; 
+      color: #fff; 
+      border: none; 
+      padding: 12px 20px; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      margin: 5px;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      font-weight: 500;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 44px;
+    }
+    .btn:hover { 
+      background: #c73e54;
+      transform: translateY(-1px);
+    }
+    .btn:active {
+      transform: translateY(0);
+    }
+    .btn:disabled { 
+      background: #555; 
+      cursor: not-allowed;
+      transform: none;
+    }
+    .preset-list { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 8px;
+    }
+    .preset-btn { 
+      background: #0f3460; 
+      padding: 10px 14px; 
+      border-radius: 8px; 
+      border: none; 
+      color: #fff; 
+      cursor: pointer;
+      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 44px;
+    }
+    .preset-btn:hover { background: #1a4a7a; }
+    .preset-btn:active { transform: scale(0.95); }
+    .preset-btn.active { background: #e94560; }
+    .preset-btn.dynamic { border: 2px solid #2e6dd6; }
+    .preset-btn.strict { border: 2px solid #4ade80; }
+    .history-item, .favorite-item { 
+      padding: 12px; 
+      background: #0f3460; 
+      margin: 8px 0; 
+      border-radius: 8px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .track-info { 
+      flex: 1;
+      min-width: 0;
+    }
+    .track-title { 
+      color: #fff;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      word-break: break-word;
+      margin-bottom: 4px;
+    }
+    .track-author { 
+      color: #888; 
+      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+      word-break: break-word;
+    }
+    .preset-meta { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 6px; 
+      margin-top: 8px;
+    }
+    .badge { 
+      display: inline-flex; 
+      align-items: center; 
+      border-radius: 999px; 
+      padding: 4px 10px; 
+      font-size: clamp(0.7rem, 2vw, 0.75rem); 
+      font-weight: 600; 
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .badge.strict { background: rgba(74, 222, 128, 0.15); color: #86efac; }
+    .badge.dynamic { background: rgba(59, 130, 246, 0.16); color: #93c5fd; }
+    .badge.seed { background: rgba(233, 69, 96, 0.18); color: #fda4af; }
+    .badge.rule { background: rgba(148, 163, 184, 0.16); color: #cbd5e1; }
+    .preset-url { 
+      color: #7dd3fc; 
+      font-size: clamp(0.75rem, 2vw, 0.82rem); 
+      margin-top: 8px; 
+      word-break: break-all;
+    }
+    .action-row { 
+      display: flex; 
+      gap: 6px; 
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .loading { 
+      color: #888; 
+      text-align: center; 
+      padding: 20px;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    }
+    .error { 
+      color: #ff6b6b; 
+      padding: 12px; 
+      background: #2d1a1a; 
+      border-radius: 8px; 
+      margin: 10px 0;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    }
+    input, select, textarea { 
+      background: #0f3460; 
+      border: 1px solid #333; 
+      color: #fff; 
+      padding: 12px; 
+      border-radius: 8px; 
+      margin: 5px;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      width: 100%;
+      max-width: 100%;
+      touch-action: manipulation;
+      -webkit-appearance: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid #e94560;
+      outline-offset: 2px;
+    }
+    .notification { 
+      position: fixed; 
+      top: 12px; 
+      right: 12px; 
+      left: 12px;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 16px 20px; 
+      border-radius: 12px; 
+      color: #fff; 
+      font-weight: 500; 
+      z-index: 1000; 
+      animation: slideIn 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      word-break: break-word;
+    }
+    .notification.success { background: #4ade80; color: #000; }
+    .notification.error { background: #ef4444; }
+    .notification.info { background: #3b82f6; }
+    .notification.pending { background: #f59e0b; color: #000; }
+    @keyframes slideIn { 
+      from { transform: translateY(-100%); opacity: 0; } 
+      to { transform: translateY(0); opacity: 1; } 
+    }
+    .preset-btn:disabled { opacity: 0.5; cursor: wait; }
+    .api-key-section { 
+      margin-top: 20px; 
+      padding-top: 20px; 
+      border-top: 1px solid #0f3460;
+    }
+    
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      .container { padding: 8px; }
+      .card { padding: 12px; margin-bottom: 12px; }
+      .btn { 
+        padding: 10px 16px;
+        margin: 3px;
+        font-size: 0.85rem;
+      }
+      .preset-btn { padding: 8px 12px; }
+      .grid { gap: 12px; }
+      .stat { padding: 8px 0; }
+      input, select, textarea { padding: 10px; margin: 3px; }
+      .history-item, .favorite-item { padding: 10px; margin: 6px 0; }
+      .notification { 
+        top: 8px; 
+        right: 8px; 
+        left: 8px;
+        padding: 12px 16px;
+      }
+      details summary { 
+        padding: 12px;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+    }
+    
+    /* Compact mode for very small screens */
+    @media (max-width: 480px) {
+      h1 { font-size: 1.3rem; margin-bottom: 12px; }
+      .card h2 { font-size: 0.95rem; }
+      .now-playing { font-size: 1rem; }
+      .btn { padding: 8px 12px; min-height: 40px; }
+      .preset-btn { padding: 6px 10px; min-height: 40px; }
+      .action-row .btn { padding: 6px 10px; }
+    }
+    
+    /* Landscape mobile */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .container { padding: 8px 16px; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    /* Touch improvements */
+    @media (hover: none) and (pointer: coarse) {
+      .btn, .preset-btn, button {
+        min-height: 44px;
+        min-width: 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎵 YT Radio Dashboard</h1>
+    
+    <div class="grid">
+      <div class="card">
+        <h2>📻 Now Playing</h2>
+        <div id="nowPlaying" class="loading">Loading...</div>
+        <div class="now-playing" id="trackTitle"></div>
+        <div id="nextTrack" style="color: #888; margin-top: 10px; font-size: clamp(0.85rem, 2.5vw, 0.95rem);"></div>
+        <div id="currentPreset" style="color: #4ade80; margin-top: 10px; font-size: clamp(0.8rem, 2.5vw, 0.9rem);"></div>
+        <div style="margin-top: 15px; display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn" style="background:#e94560;flex:1;min-width:140px;" onclick="addCurrentToFavorites()">❤️ Favorite</button>
+          <button class="btn" style="background:#666;flex:1;min-width:140px;" onclick="skipTrack()">⏭️ Skip</button>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>📊 Statistics</h2>
+        <div id="stats" class="loading">Loading...</div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>🎛️ Presets</h2>
+      <div id="presets" class="preset-list loading">Loading...</div>
+    </div>
+    
+    <div class="grid">
+      <div class="card">
+        <h2>🕐 Recent History</h2>
+        <div id="history" class="loading">Loading...</div>
+      </div>
+      
+      <div class="card">
+        <h2>⭐ Favorites</h2>
+        <div id="favorites" class="loading">Loading...</div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>📡 Server Info</h2>
+      <div style="font-size: 0.9rem;">
+        <div class="stat">
+          <span class="label">Backend URL</span>
+          <span class="value">http://localhost:3000</span>
+        </div>
+        <div class="stat">
+          <span class="label">Radio Stream</span>
+          <span class="value">http://localhost:8080</span>
+        </div>
+        <div class="stat">
+          <span class="label">Gopher</span>
+          <span class="value">gopher://localhost:8081</span>
+        </div>
+        <div class="stat">
+          <span class="label">WebSocket</span>
+          <span class="value">ws://localhost:8080</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>🎚️ Radio Control</h2>
+      <div id="radioControlPanel">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+          <button class="btn" style="flex:1;min-width:100px;" onclick="startRadio()">▶️ Start</button>
+          <button class="btn" style="flex:1;min-width:100px;" onclick="restartRadio()">🔄 Restart</button>
+          <button class="btn" style="background:#ef4444;flex:1;min-width:100px;" onclick="stopRadio()">⏹️ Stop</button>
+        </div>
+        <button class="btn" style="background:#666;width:100%;" onclick="refreshRadioStatus()">🔃 Refresh Status</button>
+        <div id="radioStatus" style="margin-top: 12px; font-weight: bold; text-align: center; font-size: clamp(0.9rem, 2.5vw, 1rem);"></div>
+        <div id="radioInfo" style="margin-top: 8px; font-size: clamp(0.8rem, 2.5vw, 0.9rem); color: #888; text-align: center;"></div>
+        <details style="margin-top: 12px;">
+          <summary style="cursor: pointer; color: #4ade80; padding: 8px; user-select: none;">📋 Radio Logs (last 50)</summary>
+          <div id="radioLogs" style="max-height: 200px; overflow-y: auto; background: #0f3460; padding: 10px; margin-top: 10px; border-radius: 8px; font-family: monospace; font-size: clamp(0.75rem, 2vw, 0.85rem);"></div>
+        </details>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>🌱 Seed URL Manager</h2>
+      <div style="margin-bottom: 15px;">
+        <div style="padding: 10px; background: #0f3460; border-radius: 4px; margin-bottom: 10px;">
+          <strong>📍 Current Active Seed:</strong>
+          <div id="activeSeedInfo" style="margin-top: 5px; color: #4ade80; font-family: monospace; font-size: 0.9rem;">Loading...</div>
+        </div>
+      </div>
+      
+      <details>
+        <summary style="cursor: pointer; color: #e94560; font-weight: bold;">✏️ Edit Manual Seed (yturl.txt)</summary>
+        <div style="margin-top: 15px;">
+          <div style="margin-bottom: 10px; color: #888; font-size: 0.9rem;">
+            This is the fallback seed URL used when no preset is active. Normally you should use Presets instead.
+          </div>
+          <div id="seedEditor">
+            <input type="text" id="seedUrl" placeholder="https://youtu.be/VIDEO_ID" style="width: 400px; max-width: 100%;">
+            <button class="btn" onclick="saveSeedUrl()">💾 Save</button>
+            <button class="btn" style="background:#666" onclick="loadSeedUrl()">🔃 Reload</button>
+          </div>
+          <div id="seedStatus" style="margin-top: 10px; font-size: 0.9rem; color: #4ade80;"></div>
+        </div>
+      </details>
+    </div>
+    
+    <div class="card">
+      <h2>⚙️ Manage Presets</h2>
+      <div id="presetManager" class="loading">Loading...</div>
+      <details class="preset-form" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #0f3460;">
+        <summary style="color: #4ade80; font-weight: bold; cursor: pointer; padding: 8px; user-select: none;">➕ Add New Preset</summary>
+        <div style="margin-top: 12px;">
+          <input type="text" id="newPresetName" placeholder="Name (e.g. my-preset)" style="width: 100%; margin: 4px 0;">
+          <input type="text" id="newPresetLabel" placeholder="Label (e.g. My Preset)" style="width: 100%; margin: 4px 0;">
+          <input type="text" id="newPresetGroup" placeholder="Group (e.g. Custom)" style="width: 100%; margin: 4px 0;">
+          <input type="text" id="newPresetUrl" placeholder="YouTube URL" style="width: 100%; margin: 4px 0;">
+          <button class="btn" style="width: 100%; margin-top: 8px;" onclick="createPreset()">➕ Add Preset</button>
+        </div>
+      </details>
+    </div>
+    
+    <div class="card">
+      <h2>✏️ Edit Preset</h2>
+      <details>
+        <summary style="color: #888; font-size: clamp(0.85rem, 2.5vw, 0.9rem); cursor: pointer; padding: 8px; user-select: none;">
+          Select a preset to edit its seed URL and settings.
+        </summary>
+        <div style="margin-top: 12px;">
+          <select id="editPresetSelect" style="width: 100%; margin: 4px 0;">
+            <option value="">-- Select Preset --</option>
+          </select>
+          <button class="btn" style="width: 100%; margin-top: 8px;" onclick="loadPresetForEdit()">📝 Load Preset</button>
+        </div>
+      </details>
+      <div id="editPresetForm" style="display: none; margin-top: 15px; padding: 15px; background: #0f3460; border-radius: 8px;">
+        <div style="margin-bottom: 10px;">
+          <label style="display: block; color: #888; margin-bottom: 5px; font-size: clamp(0.8rem, 2.5vw, 0.9rem);">Name:</label>
+          <input type="text" id="editPresetName" readonly style="background: #1a1a2e; width: 100%; margin: 0;">
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label style="display: block; color: #888; margin-bottom: 5px; font-size: clamp(0.8rem, 2.5vw, 0.9rem);">Label:</label>
+          <input type="text" id="editPresetLabel" style="width: 100%; margin: 0;">
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label style="display: block; color: #888; margin-bottom: 5px; font-size: clamp(0.8rem, 2.5vw, 0.9rem);">Group:</label>
+          <input type="text" id="editPresetGroup" style="width: 100%; margin: 0;">
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label style="display: block; color: #888; margin-bottom: 5px; font-size: clamp(0.8rem, 2.5vw, 0.9rem);">Seed URLs (one per line):</label>
+          <textarea id="editPresetSeedUrls" rows="5" style="width: 100%; margin: 0; background: #0f3460; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 8px; font-family: monospace; resize: vertical;" placeholder="https://youtu.be/VIDEO_ID_1&#10;https://youtu.be/VIDEO_ID_2&#10;https://youtu.be/VIDEO_ID_3"></textarea>
+          <div style="color: #888; font-size: clamp(0.75rem, 2vw, 0.85rem); margin-top: 5px;">💡 Tip: Add multiple YouTube URLs (one per line) for variety.</div>
+        </div>
+        <div style="margin-top: 15px; display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn" style="flex: 1; min-width: 120px;" onclick="updatePreset()">💾 Save</button>
+          <button class="btn" style="background:#666; flex: 1; min-width: 120px;" onclick="cancelEdit()">❌ Cancel</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>🎯 Custom Queue Manager</h2>
+      <details style="margin-bottom: 15px;">
+        <summary style="color: #4ade80; font-weight: bold; cursor: pointer; padding: 8px; user-select: none;">📌 About Custom Queue</summary>
+        <div style="padding: 10px; color: #888; font-size: clamp(0.8rem, 2.5vw, 0.9rem); margin-top: 8px;">
+          Activate the "Custom Queue / Manual" preset to play only the videos and playlists you add here.
+          Perfect for creating your own radio station with handpicked content!
+        </div>
+      </details>
+      
+      <details style="margin-bottom: 15px;">
+        <summary style="color: #4ade80; font-weight: bold; cursor: pointer; padding: 8px; user-select: none;">➕ Add to Queue</summary>
+        <div style="margin-top: 12px;">
+          <label style="display: block; color: #888; margin-bottom: 5px; font-size: clamp(0.8rem, 2.5vw, 0.9rem);">YouTube URL:</label>
+          <input type="text" id="customQueueUrl" placeholder="https://youtu.be/VIDEO_ID or playlist URL" style="width: 100%; margin: 4px 0;">
+          <label style="display: block; color: #888; margin: 8px 0 5px 0; font-size: clamp(0.8rem, 2.5vw, 0.9rem);">Type:</label>
+          <select id="customQueueType" style="width: 100%; margin: 4px 0;">
+            <option value="video">Video</option>
+            <option value="playlist">Playlist</option>
+          </select>
+          <button class="btn" style="width: 100%; margin-top: 8px;" onclick="addToCustomQueue()">➕ Add to Queue</button>
+        </div>
+      </details>
+      
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap;">
+          <h3 style="color: #4ade80; margin: 0; font-size: clamp(0.9rem, 2.5vw, 1rem);">📋 Queue (<span id="customQueueCount">0</span>)</h3>
+          <button class="btn" style="background:#ef4444;padding:8px 16px;margin:0;" onclick="clearCustomQueue()">🗑️ Clear</button>
+        </div>
+        <div id="customQueueList" class="loading">Loading...</div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>⚙️ Settings</h2>
+      <div class="api-key-section">
+        <form onsubmit="event.preventDefault(); saveApiKey();" style="display: inline;">
+          <label>API Key: </label>
+          <input type="password" id="apiKey" placeholder="Enter API key" autocomplete="current-password">
+          <button type="submit" class="btn">Save</button>
+        </form>
+        <button class="btn" style="background:#666" onclick="resetApiKey()">Reset</button>
+        <span id="saveStatus" style="color: #4ade80; margin-left: 10px;"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = "";
+    let currentApiKey = localStorage.getItem("apiKey") || "";
+    let notificationTimeout = null;
+    let currentTrackData = null;
+    
+    function showNotification(message, type = "info", duration = 3000) {
+      const existing = document.querySelector(".notification");
+      if (existing) existing.remove();
+      if (notificationTimeout) clearTimeout(notificationTimeout);
+      
+      const notif = document.createElement("div");
+      notif.className = `notification ${type}`;
+      notif.textContent = message;
+      document.body.appendChild(notif);
+      
+      notificationTimeout = setTimeout(() => notif.remove(), duration);
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function formatPresetMode(preset) {
+      return preset.stationMode || preset.station_mode || "dynamic";
+    }
+
+    function getPresetSeedCount(preset) {
+      return preset.seed_url_count || (Array.isArray(preset.seedUrls) ? preset.seedUrls.length : 1);
+    }
+
+    function renderPresetBadge(label, type) {
+      return `<span class="badge ${type}">${escapeHtml(label)}</span>`;
+    }
+
+    function renderPresetSummary(preset) {
+      const mode = formatPresetMode(preset);
+      const seedCount = getPresetSeedCount(preset);
+      const badges = [
+        renderPresetBadge(mode.toUpperCase(), mode === "strict" ? "strict" : "dynamic"),
+        renderPresetBadge(`${seedCount} seeds`, "seed")
+      ];
+
+      if (Array.isArray(preset.rules_summary)) {
+        preset.rules_summary.slice(0, 4).forEach((entry) => {
+          badges.push(renderPresetBadge(entry, "rule"));
+        });
+      }
+
+      return badges.join("");
+    }
+    
+    async function fetchJson(url, options = {}) {
+      const headers = { "Content-Type": "application/json" };
+      if (currentApiKey) headers["X-API-Key"] = currentApiKey;
+      const res = await fetch(url, { ...options, headers });
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    }
+    
+    async function loadNowPlaying() {
+      try {
+        const data = await fetchJson("/api/radio/now-playing");
+        const title = data.current?.display || "Not playing";
+        document.getElementById("trackTitle").textContent = title;
+        document.getElementById("nowPlaying").style.display = "none";
+        
+        // Store current track data globally
+        currentTrackData = data.current;
+        
+        // Update active seed info
+        const activeSeedEl = document.getElementById("activeSeedInfo");
+        if (data.current_seed_url) {
+          activeSeedEl.innerHTML = `
+            <div>🎵 ${data.current_seed_url}</div>
+            <div style="color: #888; font-size: 0.85rem; margin-top: 3px;">
+              ${data.preset ? `From preset: ${data.preset}` : 'From yturl.txt (no preset active)'}
+            </div>
+          `;
+        } else {
+          activeSeedEl.textContent = "No seed URL active";
+        }
+        
+        // Auto-save to history when track changes
+        if (data.current && data.current.id) {
+          const lastTracked = localStorage.getItem("lastTrackedId");
+          if (lastTracked !== data.current.id) {
+            localStorage.setItem("lastTrackedId", data.current.id);
+            // Save to history
+            try {
+              await fetchJson("/api/history", {
+                method: "POST",
+                body: JSON.stringify({ track: data.current })
+              });
+              loadHistory(); // Refresh history display
+            } catch (e) {
+              console.log("Failed to save to history:", e);
+            }
+          }
+        }
+        
+        if (data.next) {
+          document.getElementById("nextTrack").textContent = `Next: ${data.next.title || "Unknown"}`;
+        } else {
+          document.getElementById("nextTrack").textContent = "";
+        }
+        
+        // Show current preset
+        if (data.preset) {
+          document.getElementById("currentPreset").textContent = `📻 Preset: ${data.preset}`;
+        } else {
+          document.getElementById("currentPreset").textContent = "";
+        }
+      } catch (e) {
+        document.getElementById("nowPlaying").textContent = "Radio offline";
+      }
+    }
+    
+    async function loadStats() {
+      try {
+        const data = await fetchJson("/api/stats/extended");
+        const s = data.radio || {};
+        const h = data.history || {};
+        document.getElementById("stats").innerHTML = `
+          <div class="stat"><span class="label">Uptime</span><span class="value">${Math.floor(s.uptime_seconds / 3600)}h ${Math.floor((s.uptime_seconds % 3600) / 60)}m</span></div>
+          <div class="stat"><span class="label">Songs Played</span><span class="value">${s.songs_started || 0}</span></div>
+          <div class="stat"><span class="label">Queue</span><span class="value">${s.queue_length || 0}</span></div>
+          <div class="stat"><span class="label">Listeners (HTTP)</span><span class="value">${s.audio_listener_count || 0}</span></div>
+          <div class="stat"><span class="label">History Total</span><span class="value">${h.totalPlayed || 0}</span></div>
+          <div class="stat"><span class="label">Unique Tracks</span><span class="value">${h.uniqueTracks || 0}</span></div>
+        `;
+      } catch (e) {
+        document.getElementById("stats").textContent = "Error loading stats";
+      }
+    }
+    
+    async function loadPresets() {
+      try {
+        const data = await fetchJson("/api/radio/preset");
+        const presets = data.available_presets || [];
+        const active = data.active_preset;
+        
+        document.getElementById("presets").innerHTML = presets.map(p => {
+          const mode = formatPresetMode(p);
+          const seedCount = getPresetSeedCount(p);
+          const rawLabel = p.label || p.name;
+          const label = escapeHtml(rawLabel);
+          const title = escapeHtml(`${rawLabel} | ${mode} | ${seedCount} seed${seedCount === 1 ? "" : "s"}`);
+          return `<button class="preset-btn ${p.name === active ? "active" : ""} ${mode === "strict" ? "strict" : "dynamic"}" title="${title}" onclick="setPreset('${encodeURIComponent(p.name)}')">${label}</button>`;
+        }).join("");
+      } catch (e) {
+        document.getElementById("presets").textContent = "Error loading presets";
+      }
+    }
+    
+    async function setPreset(name) {
+      try {
+        await fetchJson("/api/radio/preset", {
+          method: "POST",
+          body: JSON.stringify({ preset: decodeURIComponent(name) })
+        });
+        loadPresets();
+        loadNowPlaying();
+      } catch (e) {
+        alert("Failed to set preset");
+      }
+    }
+    
+    async function loadHistory() {
+      try {
+        const data = await fetchJson("/api/history?limit=10");
+        if (!data.length) {
+          document.getElementById("history").innerHTML = "<div style='color:#888'>No history yet</div>";
+          return;
+        }
+        document.getElementById("history").innerHTML = data.slice().reverse().map(t => `
+          <div class="history-item">
+            <div class="track-info">
+              <div class="track-title">${escapeHtml(t.title || "Unknown")}</div>
+              <div class="track-author">${escapeHtml(t.author || "Unknown")}</div>
+            </div>
+            <button class="btn" style="padding:5px 10px;margin:0;background:#4ade80;color:#000" onclick="replayTrack('${escapeHtml(t.id)}', '${escapeHtml(t.title || "Unknown")}')">🔁 Replay</button>
+          </div>
+        `).join("");
+      } catch (e) {
+        document.getElementById("history").textContent = "Error loading history";
+      }
+    }
+    
+    async function loadFavorites() {
+      try {
+        const data = await fetchJson("/api/favorites");
+        if (!data.length) {
+          document.getElementById("favorites").innerHTML = "<div style='color:#888'>No favorites yet</div>";
+          return;
+        }
+        document.getElementById("favorites").innerHTML = data.map(t => `
+          <div class="favorite-item">
+            <div class="track-info">
+              <div class="track-title">${escapeHtml(t.title || "Unknown")}</div>
+              <div class="track-author">${escapeHtml(t.author || "Unknown")}</div>
+            </div>
+            <div class="action-row">
+              <button class="btn" style="padding:5px 10px;margin:0;background:#4ade80;color:#000" onclick="replayTrack('${escapeHtml(t.id)}', '${escapeHtml(t.title || "Unknown")}')">🔁 Replay</button>
+              <button class="btn" style="padding:5px 10px;margin:0;background:#e94560" onclick="removeFavorite('${escapeHtml(t.id)}')">✕</button>
+            </div>
+          </div>
+        `).join("");
+      } catch (e) {
+        document.getElementById("favorites").textContent = "Error loading favorites";
+      }
+    }
+    
+    async function loadPresetManager() {
+      try {
+        const data = await fetchJson("/api/presets");
+        document.getElementById("presetManager").innerHTML = data.map(p => `
+          <div class="history-item">
+            <div class="track-info">
+              <div class="track-title">${p.label || p.name}</div>
+              <div class="track-author">${p.group || "Custom"} - ${p.seedUrl || "No seed"}</div>
+            </div>
+            <button class="btn" style="padding:5px 10px;margin:0;background:#4ade80;color:#000" onclick="activatePreset('${p.name}', 'safe')">▶</button>
+            <button class="btn" style="padding:5px 10px;margin:0;background:#3b82f6" onclick="activatePreset('${p.name}', 'hq')">HQ</button>
+            <button class="btn" style="padding:5px 10px;margin:0;background:#e94560" onclick="deletePreset('${p.name}')">🗑️</button>
+          </div>
+        `).join("");
+        
+        // Populate edit dropdown
+        const select = document.getElementById("editPresetSelect");
+        select.innerHTML = '<option value="">-- Select Preset --</option>' + 
+          data.map(p => `<option value="${p.name}">${p.label || p.name}</option>`).join("");
+      } catch (e) {
+        document.getElementById("presetManager").textContent = "Error loading presets";
+      }
+    }
+    
+    async function createPreset() {
+      const name = document.getElementById("newPresetName").value.trim();
+      const label = document.getElementById("newPresetLabel").value.trim();
+      const group = document.getElementById("newPresetGroup").value.trim();
+      const seedUrl = document.getElementById("newPresetUrl").value.trim();
+      
+      if (!name || !seedUrl) {
+        showNotification("Name and YouTube URL are required", "error");
+        return;
+      }
+      
+      try {
+        // First save the preset
+        await fetchJson("/api/presets", {
+          method: "POST",
+          body: JSON.stringify({ name, label, group, seedUrl })
+        });
+        
+        // Then reload presets in radio
+        try {
+          await fetchJson("/api/reload-presets", { method: "POST" });
+        } catch (e) {
+          console.log("Reload failed:", e);
+        }
+        
+        document.getElementById("newPresetName").value = "";
+        document.getElementById("newPresetLabel").value = "";
+        document.getElementById("newPresetGroup").value = "";
+        document.getElementById("newPresetUrl").value = "";
+        
+        showNotification(`Preset "${name}" created!`, "success");
+        loadPresetManager();
+        loadPresets();
+      } catch (e) {
+        showNotification("Failed to create preset: " + e.message, "error");
+      }
+    }
+    
+    async function deletePreset(name) {
+      const decodedName = decodeURIComponent(name);
+      if (!confirm(`Delete preset "${decodedName}"?`)) return;
+      try {
+        await fetchJson(`/api/presets/${encodeURIComponent(decodedName)}`, { method: "DELETE" });
+        
+        // Reload presets in radio
+        try {
+          await fetchJson("/api/reload-presets", { method: "POST" });
+        } catch (e) {}
+        
+        showNotification(`Preset "${decodedName}" deleted!`, "success");
+        loadPresetManager();
+        loadPresets();
+      } catch (e) {
+        showNotification("Failed to delete preset: " + e.message, "error");
+      }
+    }
+    
+    async function activatePreset(name, profile = "safe") {
+      const decodedName = decodeURIComponent(name);
+      showNotification(`Activating preset "${decodedName}"...`, "pending", 5000);
+      try {
+        const result = await fetchJson(`/api/presets/${encodeURIComponent(decodedName)}/activate`, { method: "POST", body: JSON.stringify({ profile }) });
+        
+        // Get current playing info after preset change
+        const nowPlaying = await fetchJson("/api/radio/now-playing");
+        const current = nowPlaying.current;
+        const next = nowPlaying.next;
+        
+        let message = `Preset "${decodedName}" activated!`;
+        if (current) {
+          message += `\n🎵 Now: ${current.display || current.title}`;
+        }
+        if (next) {
+          message += `\n⏭️ Next: ${next.title || "Unknown"}`;
+        }
+        
+        showNotification(message, "success", 5000);
+        loadPresets();
+        loadNowPlaying();
+      } catch (e) {
+        showNotification("Failed to activate preset: " + e.message, "error");
+      }
+    }
+    
+    async function removeFavorite(id) {
+      try {
+        await fetchJson(`/api/favorites/${id}`, { method: "DELETE" });
+        showNotification("Removed from favorites", "success");
+        loadFavorites();
+      } catch (e) {
+        showNotification("Failed to remove favorite", "error");
+      }
+    }
+    
+    async function saveApiKey() {
+      const key = document.getElementById("apiKey").value.trim();
+      if (!key) return;
+      
+      try {
+        if (!currentApiKey || currentApiKey === key) {
+          const res = await fetch("/api/settings", {
+            method: "GET",
+            headers: { "X-API-Key": key }
+          });
+          if (!res.ok) throw new Error(await res.text());
+          currentApiKey = key;
+          localStorage.setItem("apiKey", key);
+          showNotification("API key saved locally.", "success");
+          return;
+        }
+
+        const res = await fetch("/api/settings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-API-Key": currentApiKey
+          },
+          body: JSON.stringify({ apiKey: key })
+        });
+        if (!res.ok) throw new Error(await res.text());
+        currentApiKey = key;
+        localStorage.setItem("apiKey", key);
+        showNotification("API key updated!", "success");
+      } catch (e) {
+        if (currentApiKey && currentApiKey !== key) {
+          try {
+            const retry = await fetch("/api/settings", {
+              method: "GET",
+              headers: { "X-API-Key": key }
+            });
+            if (retry.ok) {
+              currentApiKey = key;
+              localStorage.setItem("apiKey", key);
+              showNotification("API key saved locally.", "success");
+              return;
+            }
+          } catch (_ignored) {
+          }
+        }
+        showNotification("Failed to save API key: " + e.message, "error");
+      }
+    }
+    
+    async function resetApiKey() {
+      if (!confirm("Reset API key? This will rotate the current key and replace it with a new generated key.")) return;
+      try {
+        const res = await fetch("/api/settings/reset", {
+          method: "POST",
+          headers: { "X-API-Key": currentApiKey }
+        });
+        if (!res.ok) throw new Error(await res.text());
+        const data = await res.json();
+        currentApiKey = data.apiKey || "";
+        if (currentApiKey) {
+          localStorage.setItem("apiKey", currentApiKey);
+          document.getElementById("apiKey").value = currentApiKey;
+        } else {
+          localStorage.removeItem("apiKey");
+          document.getElementById("apiKey").value = "";
+        }
+        showNotification("API key rotated.", "success");
+      } catch (e) {
+        showNotification("Failed to reset: " + e.message, "error");
+      }
+    }
+    
+    async function refreshRadioStatus() {
+      try {
+        const data = await fetchJson("/api/radio/status");
+        const statusEl = document.getElementById("radioStatus");
+        const infoEl = document.getElementById("radioInfo");
+        
+        if (data.running && data.healthy) {
+          statusEl.textContent = "🟢 Running";
+          statusEl.style.color = "#4ade80";
+        } else if (data.running && !data.healthy) {
+          statusEl.textContent = "🟡 Starting...";
+          statusEl.style.color = "#f59e0b";
+        } else if (data.starting) {
+          statusEl.textContent = "🟡 Starting...";
+          statusEl.style.color = "#f59e0b";
+        } else {
+          statusEl.textContent = "🔴 Stopped";
+          statusEl.style.color = "#ef4444";
+        }
+        
+        infoEl.textContent = data.pid ? `PID: ${data.pid}` : "";
+        
+        // Update logs
+        if (data.logs && data.logs.length > 0) {
+          const logsEl = document.getElementById("radioLogs");
+          logsEl.innerHTML = data.logs.map(log => {
+            const color = log.type === "error" ? "#ef4444" : log.type === "warn" ? "#f59e0b" : "#4ade80";
+            const time = new Date(log.timestamp).toLocaleTimeString();
+            return `<div style="color: ${color}; margin: 2px 0;">[${time}] ${log.message}</div>`;
+          }).join("");
+          logsEl.scrollTop = logsEl.scrollHeight;
+        }
+      } catch (e) {
+        document.getElementById("radioStatus").textContent = "🔴 Offline";
+        document.getElementById("radioStatus").style.color = "#ef4444";
+      }
+    }
+    
+    async function startRadio() {
+      showNotification("Starting radio...", "pending");
+      try {
+        const result = await fetchJson("/api/radio/start", { method: "POST" });
+        showNotification(result.message || "Radio started!", "success");
+        setTimeout(refreshRadioStatus, 2000);
+      } catch (e) {
+        showNotification("Failed to start: " + e.message, "error");
+      }
+    }
+    
+    async function restartRadio() {
+      showNotification("Restarting radio...", "pending");
+      try {
+        const result = await fetchJson("/api/radio/restart", { method: "POST" });
+        showNotification("Radio restarting...", "info", 5000);
+        setTimeout(() => {
+          refreshRadioStatus();
+          loadNowPlaying();
+          loadPresets();
+        }, 4000);
+      } catch (e) {
+        showNotification("Failed to restart: " + e.message, "error");
+      }
+    }
+    
+    async function stopRadio() {
+      if (!confirm("Stop the radio?")) return;
+      try {
+        const result = await fetchJson("/api/radio/stop", { method: "POST" });
+        showNotification("Radio stopped", "success");
+        refreshRadioStatus();
+      } catch (e) {
+        showNotification("Failed to stop: " + e.message, "error");
+      }
+    }
+    
+    async function addCurrentToFavorites() {
+      if (!currentTrackData) {
+        showNotification("No track playing", "error");
+        return;
+      }
+      
+      try {
+        await fetchJson("/api/favorites", {
+          method: "POST",
+          body: JSON.stringify({ track: currentTrackData })
+        });
+        showNotification(`Added "${currentTrackData.title}" to favorites!`, "success");
+        loadFavorites();
+      } catch (e) {
+        showNotification("Failed to add to favorites: " + e.message, "error");
+      }
+    }
+    
+    async function skipTrack() {
+      if (!confirm("Skip current track?")) return;
+      
+      showNotification("Skipping track...", "pending");
+      
+      try {
+        const result = await fetchJson("/api/radio/skip", {
+          method: "POST"
+        });
+        
+        if (result.ok) {
+          showNotification("Track skipped! Loading next track...", "success", 3000);
+          setTimeout(() => {
+            loadNowPlaying();
+            loadStats();
+          }, 2000);
+        } else {
+          showNotification(result.message || "Failed to skip track", "error");
+        }
+      } catch (e) {
+        showNotification("Failed to skip track: " + e.message, "error");
+      }
+    }
+    
+    async function replayTrack(videoId, title) {
+      if (!videoId) {
+        showNotification("Invalid track ID", "error");
+        return;
+      }
+      
+      showNotification(`Adding "${title}" to queue...`, "pending");
+      
+      try {
+        const result = await fetchJson("/api/radio/queue", {
+          method: "POST",
+          body: JSON.stringify({ videoId })
+        });
+        
+        if (result.ok) {
+          showNotification(`"${title}" added to queue! Will play soon.`, "success", 4000);
+        } else {
+          showNotification(result.message || "Failed to add to queue", "error");
+        }
+      } catch (e) {
+        showNotification("Failed to add to queue: " + e.message, "error");
+      }
+    }
+    
+    async function loadSeedUrl() {
+      try {
+        const data = await fetchJson("/api/seed");
+        document.getElementById("seedUrl").value = data.seedUrl || "";
+        document.getElementById("seedStatus").textContent = data.seedUrl ? "✓ Loaded" : "No seed URL set";
+      } catch (e) {
+        showNotification("Failed to load seed URL: " + e.message, "error");
+      }
+    }
+    
+    async function saveSeedUrl() {
+      const seedUrl = document.getElementById("seedUrl").value.trim();
+      
+      if (!seedUrl) {
+        showNotification("Please enter a YouTube URL", "error");
+        return;
+      }
+      
+      if (!seedUrl.includes("youtube.com") && !seedUrl.includes("youtu.be")) {
+        showNotification("Invalid YouTube URL", "error");
+        return;
+      }
+      
+      try {
+        await fetchJson("/api/seed", {
+          method: "POST",
+          body: JSON.stringify({ seedUrl })
+        });
+        showNotification("Seed URL saved! Restart radio to apply.", "success", 5000);
+        document.getElementById("seedStatus").textContent = "✓ Saved - restart radio to apply";
+      } catch (e) {
+        showNotification("Failed to save seed URL: " + e.message, "error");
+      }
+    }
+    
+    let allPresets = [];
+    
+    async function loadPresetForEdit() {
+      const presetName = document.getElementById("editPresetSelect").value;
+      if (!presetName) {
+        showNotification("Please select a preset", "error");
+        return;
+      }
+      
+      try {
+        const data = await fetchJson("/api/presets");
+        allPresets = data;
+        const preset = data.find(p => p.name === presetName);
+        
+        if (!preset) {
+          showNotification("Preset not found", "error");
+          return;
+        }
+        
+        document.getElementById("editPresetName").value = preset.name;
+        document.getElementById("editPresetLabel").value = preset.label || preset.name;
+        document.getElementById("editPresetGroup").value = preset.group || "";
+        
+        // Handle multiple seed URLs
+        let seedUrlsText = "";
+        if (Array.isArray(preset.seedUrls) && preset.seedUrls.length > 0) {
+          seedUrlsText = preset.seedUrls.join("\n");
+        } else if (preset.seedUrl) {
+          seedUrlsText = preset.seedUrl;
+        }
+        document.getElementById("editPresetSeedUrls").value = seedUrlsText;
+        
+        document.getElementById("editPresetForm").style.display = "block";
+      } catch (e) {
+        showNotification("Failed to load preset: " + e.message, "error");
+      }
+    }
+    
+    async function updatePreset() {
+      const name = document.getElementById("editPresetName").value;
+      const label = document.getElementById("editPresetLabel").value.trim();
+      const group = document.getElementById("editPresetGroup").value.trim();
+      const seedUrlsText = document.getElementById("editPresetSeedUrls").value.trim();
+      
+      if (!seedUrlsText) {
+        showNotification("At least one seed URL is required", "error");
+        return;
+      }
+      
+      // Parse seed URLs (one per line)
+      const seedUrls = seedUrlsText
+        .split("\n")
+        .map(url => url.trim())
+        .filter(url => url.length > 0);
+      
+      // Validate all URLs
+      for (const url of seedUrls) {
+        if (!url.includes("youtube.com") && !url.includes("youtu.be")) {
+          showNotification(`Invalid YouTube URL: ${url}`, "error");
+          return;
+        }
+      }
+      
+      if (seedUrls.length === 0) {
+        showNotification("At least one valid seed URL is required", "error");
+        return;
+      }
+      
+      try {
+        // Get original preset to preserve other settings
+        const original = allPresets.find(p => p.name === name);
+        
+        // Build update payload
+        const payload = { 
+          name, 
+          label, 
+          group,
+          profiles: original?.profiles, // Preserve existing profiles
+          stationMode: original?.stationMode, // Preserve station mode
+          rules: original?.rules // Preserve rules
+        };
+        
+        // Set seed URLs
+        if (seedUrls.length === 1) {
+          payload.seedUrl = seedUrls[0];
+        } else {
+          payload.seedUrls = seedUrls;
+          payload.seedUrl = seedUrls[0]; // First one as primary
+        }
+        
+        await fetchJson("/api/presets", {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+        
+        // Reload presets in radio
+        try {
+          await fetch("/api/reload-presets", { method: "POST" });
+        } catch (e) {}
+        
+        showNotification(`Preset "${name}" updated with ${seedUrls.length} seed URL${seedUrls.length > 1 ? 's' : ''}!`, "success");
+        document.getElementById("editPresetForm").style.display = "none";
+        document.getElementById("editPresetSelect").value = "";
+        loadPresetManager();
+      } catch (e) {
+        showNotification("Failed to update preset: " + e.message, "error");
+      }
+    }
+    
+    function cancelEdit() {
+      document.getElementById("editPresetForm").style.display = "none";
+      document.getElementById("editPresetSelect").value = "";
+    }
+    
+    // Custom Queue Management
+    async function loadCustomQueue() {
+      try {
+        const data = await fetchJson("/api/custom-queue");
+        document.getElementById("customQueueCount").textContent = data.length;
+        
+        if (!data.length) {
+          document.getElementById("customQueueList").innerHTML = "<div style='color:#888;padding:20px;text-align:center;'>No items in custom queue yet.<br>Add videos or playlists above to get started!</div>";
+          return;
+        }
+        
+        document.getElementById("customQueueList").innerHTML = data.map((item, index) => {
+          const typeIcon = item.type === "playlist" ? "📑" : "🎵";
+          const typeBadge = item.type === "playlist" ? 
+            '<span style="background:#3b82f6;color:#fff;padding:2px 6px;border-radius:3px;font-size:0.75rem;margin-left:5px;">PLAYLIST</span>' : 
+            '<span style="background:#4ade80;color:#000;padding:2px 6px;border-radius:3px;font-size:0.75rem;margin-left:5px;">VIDEO</span>';
+          
+          return `
+            <div class="history-item">
+              <div style="flex: 1;">
+                <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                  <span style="color: #e94560; font-weight: bold; margin-right: 8px;">#${index + 1}</span>
+                  <span style="font-size: 1.2rem; margin-right: 5px;">${typeIcon}</span>
+                  ${typeBadge}
+                </div>
+                <div style="color: #7dd3fc; font-size: 0.85rem; word-break: break-all; font-family: monospace;">${escapeHtml(item.url)}</div>
+                <div style="color: #666; font-size: 0.75rem; margin-top: 3px;">Added: ${new Date(item.addedAt).toLocaleString()}</div>
+              </div>
+              <button class="btn" style="padding:5px 10px;margin:0;background:#e94560" onclick="removeFromCustomQueue('${item.id}')">🗑️</button>
+            </div>
+          `;
+        }).join("");
+      } catch (e) {
+        document.getElementById("customQueueList").innerHTML = "<div style='color:#ff6b6b'>Error loading custom queue</div>";
+      }
+    }
+    
+    async function addToCustomQueue() {
+      const url = document.getElementById("customQueueUrl").value.trim();
+      const type = document.getElementById("customQueueType").value;
+      
+      if (!url) {
+        showNotification("Please enter a YouTube URL", "error");
+        return;
+      }
+      
+      if (!url.includes("youtube.com") && !url.includes("youtu.be")) {
+        showNotification("Invalid YouTube URL", "error");
+        return;
+      }
+      
+      try {
+        const result = await fetchJson("/api/custom-queue", {
+          method: "POST",
+          body: JSON.stringify({ url, type })
+        });
+        
+        document.getElementById("customQueueUrl").value = "";
+        showNotification(`${type === "playlist" ? "Playlist" : "Video"} added to custom queue!`, "success");
+        loadCustomQueue();
+      } catch (e) {
+        showNotification("Failed to add to custom queue: " + e.message, "error");
+      }
+    }
+    
+    async function removeFromCustomQueue(id) {
+      if (!confirm("Remove this item from custom queue?")) return;
+      
+      try {
+        await fetchJson(`/api/custom-queue/${id}`, { method: "DELETE" });
+        showNotification("Item removed from custom queue", "success");
+        loadCustomQueue();
+      } catch (e) {
+        showNotification("Failed to remove item: " + e.message, "error");
+      }
+    }
+    
+    async function clearCustomQueue() {
+      if (!confirm("Clear entire custom queue? This cannot be undone!")) return;
+      
+      try {
+        await fetchJson("/api/custom-queue", { method: "DELETE" });
+        showNotification("Custom queue cleared", "success");
+        loadCustomQueue();
+      } catch (e) {
+        showNotification("Failed to clear queue: " + e.message, "error");
+      }
+    }
+    
+    // Auto-refresh
+    setInterval(() => { loadNowPlaying(); loadStats(); refreshRadioStatus(); }, 5000);
+    
+    // Initial load
+    if (currentApiKey) {
+      document.getElementById("apiKey").value = currentApiKey;
+    }
+    loadNowPlaying();
+    loadStats();
+    loadPresets();
+    loadHistory();
+    loadFavorites();
+    loadPresetManager();
+    refreshRadioStatus();
+    loadSeedUrl();
+    loadCustomQueue();
+  </script>
+</body>
+</html>

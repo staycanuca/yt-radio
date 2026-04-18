@@ -1,0 +1,46 @@
+{
+  "name": "ytradio",
+  "version": "0.0.0",
+  "description": "A YouTube-backed HTTP and Gopher radio server with presets, metadata, and fallback playback backends.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "start:backend": "node backend/server.js",
+    "start:radio": "powershell -ExecutionPolicy Bypass -File .\\start-radio.ps1",
+    "start:radio:hq": "cmd /c .\\start-radio-high-quality.cmd",
+    "start:radio:safe": "cmd /c .\\start-radio-safe.cmd",
+    "set:preset": "powershell -ExecutionPolicy Bypass -File .\\set-radio-preset.ps1",
+    "status:radio": "powershell -ExecutionPolicy Bypass -File .\\status-radio.ps1",
+    "stop:radio": "powershell -ExecutionPolicy Bypass -File .\\stop-radio.ps1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Yonle",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "axios": "^1.15.0",
+    "cheerio": "^1.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.18.2",
+    "gopherserver.js": "^1.0.2",
+    "http-proxy-middleware": "^2.0.6",
+    "https-proxy-agent": "^9.0.0",
+    "lru-cache": "^11.3.5",
+    "openradio": "latest",
+    "socks-proxy-agent": "^10.0.0",
+    "ws": "^8.13.0",
+    "youtubei.js": "latest"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yonle/ytradio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Yonle/ytradio/issues"
+  },
+  "homepage": "https://github.com/Yonle/ytradio#readme"
+}
