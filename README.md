@@ -467,8 +467,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/yt-radio/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/yt-radio/discussions)
+- **Issues**: [GitHub Issues](https://github.com/staycanuca/yt-radio/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/staycanuca/yt-radio/discussions)
 
 ## 🗺️ Roadmap
 
